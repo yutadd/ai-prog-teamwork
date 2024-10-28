@@ -6,31 +6,23 @@ load_dotenv()
 
 class WeatherAPI:
     def __init__(self):
-        self.api_key = os.getenv('OPENWEATHER_API_KEY')
-        self.base_url = "http://api.openweathermap.org/data/2.5/weather"
+        # OpenWeatherMap の無料APIの代わりに wttr.in を使用
+        self.base_url = "https://wttr.in"
 
     def get_weather(self, city):
-        params = {
-            'q': city,
-            'appid': self.api_key,
-            'units': 'metric',
-            'lang': 'ja'
-        }
-        
         try:
-            response = requests.get(self.base_url, params=params)
+            # JSONフォーマットでデータを取得
+            response = requests.get(f"{self.base_url}/{city}?format=j1")
             data = response.json()
             
             if response.status_code == 200:
                 return {
-                    'temperature': data['main']['temp'],
-                    'weather': data['weather'][0]['main'],
-                    'description': data['weather'][0]['description'],
-                    'humidity': data['main']['humidity']
+                    'temperature': data['current_condition'][0]['temp_C'],
+                    'weather': data['current_condition'][0]['weatherDesc'][0]['value'],
+                    'description': data['current_condition'][0]['weatherDesc'][0]['value'],
+                    'humidity': data['current_condition'][0]['humidity']
                 }
             else:
                 return None
         except:
             return None
-
-print("test")
