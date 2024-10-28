@@ -15,17 +15,23 @@
         <main>
             <div class="chat-container">
                 <div class="chat-messages" id="chat-messages">
-                    <!-- メッセージが表示される場所 -->
+                    <div class="message bot-message">
+                        <div class="avatar">AI</div>
+                        <div class="message-content">
+                            こんにちは！どのようなお手伝いができますか？
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="chat-input">
                     <form id="chat-form">
-                        <input type="text" id="user-input" placeholder="メッセージを入力...">
+                        <input type="text" id="user-input" placeholder="メッセージを入力..." autocomplete="off">
                         <button type="submit">送信</button>
                     </form>
                 </div>
             </div>
         </main>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
