@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html lang="js">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
-    <title>コーディネイトAI</title>
+    <title>天気に基づくコーディネートAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div id="container">
-        <h1>Pythonコード実行</h1>
-        <textarea id="inputBox" rows="5" placeholder="Pythonコードを入力してください"></textarea>
-        <br>
-        <button onclick="runPython()">実行</button>
-        <p id="result"></p>
+    <div class="container">
+        <h1>天気に基づくコーディネートAI</h1>
+        
+        <form method="POST" class="search-form">
+            <input type="text" name="city" placeholder="都市名を入力" required>
+            <button type="submit">天気を確認</button>
+        </form>
+
+        {% if weather %}
+        <div class="weather-info">
+            <h2>{{ city }}の天気情報</h2>
+            <p>気温: {{ weather.temperature }}°C</p>
+            <p>天気: {{ weather.description }}</p>
+            <p>湿度: {{ weather.humidity }}%</p>
+        </div>
+
+        <div class="coordinate-info">
+            <h2>おすすめコーディネート</h2>
+            <h3>トップス</h3>
+            <ul>
+                {% for top in coordinate.tops %}
+                <li>{{ top }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>ボトムス</h3>
+            <ul>
+                {% for bottom in coordinate.bottoms %}
+                <li>{{ bottom }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>アクセサリー・小物</h3>
+            <ul>
+                {% for acc in coordinate.accessories %}
+                <li>{{ acc }}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="advice">
+                <p>{{ coordinate.advice }}</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
-    <script src="../js/system.js"></script>
 </body>
 </html>
