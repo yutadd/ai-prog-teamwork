@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <title>コーディネイトAI</title>
 </head>
 <body>
     <div id="container">
-        <h1>入力を受け付けるボックス</h1>
-        <p id="displayText"></p>
-        <input type="text" id="inputBox" placeholder="ここに入力してください">
-        <button onclick="showInput()">送信</button>
+        <h1>Pythonコード実行</h1>
+        <textarea id="inputBox" rows="5" placeholder="Pythonコードを入力してください"></textarea>
+        <br>
+        <button onclick="runPython()">実行</button>
+        <p id="result"></p>
     </div>
     <script src="../js/system.js"></script>
 </body>
