@@ -1,0 +1,2 @@
+Python ～～としたい場合は相対パスを通してないので、絶対パスで指定してあげる
+& C:/Users/ITWhiteHacker/.conda/envs/ai-prog-3/python.exe ～このようにpython指定してあげる
