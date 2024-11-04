@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>天気チャットボット</title>
+    <title>チャットボット</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>天気チャットボット</h1>
+            <h1>天気＆おすすめの服装</h1>
         </header>
         
         <main>
@@ -18,7 +18,8 @@
                     <div class="message bot-message">
                         <div class="avatar">AI</div>
                         <div class="message-content">
-                            こんにちは！都市名を入力して天気を確認してください。
+                            こんにちは！都市名を入力して<br>
+                            天気とおすすめの服装を確認してください！
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,11 @@
                 </div>
             </div>
         </main>
+        <p>都市名がローマ字もしくは英語での対応になります。<br>
+        都市名が間違っていないか確認してください。<br></p>
+    </p>
     </div>
+    
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
