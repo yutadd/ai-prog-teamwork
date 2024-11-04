@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const chatMessages = document.getElementById('chat-messages');
 
-    const apiKey = '200638d770987073a0bf21f6e2be8d64'; // ここにOpenWeatherMapのAPIキーを入力
+    const apiKey = '1c33c613c2357110a08a8964f4aa621f'; // ここにOpenWeatherMapのAPIキーを入力
 
     chatForm.addEventListener('submit', function(e) {
         e.preventDefault();
