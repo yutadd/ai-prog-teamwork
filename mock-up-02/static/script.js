@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const chatMessages = document.getElementById('chat-messages');
 
-    const apiKey = '1c33c613c2357110a08a8964f4aa621f'; // ここにOpenWeatherMapのAPIキーを入力
-
     chatForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const city = userInput.value.trim();
@@ -37,24 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fetchWeather(city) {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ja`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.cod === 200) {
-                    const weather = data.weather[0].description;
-                    const temp = data.main.temp;
-                    const message = `${city}の天気は${weather}で、気温は${temp}℃です。`;
-                    addMessage(message, 'bot');
-                } else {
-                    addMessage('都市が見つかりませんでした。もう一度お試しください。', 'bot');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-                addMessage('天気情報を取得できませんでした。後でもう一度お試しください。', 'bot');
-            });
+        fetch('/api/weather', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ city: city })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                addMessage(data.error, 'bot');
+            } else {
+                const message = `${city}の天気は${data.weather}で、気温は${data.temp}℃です。`;
+                addMessage(message, 'bot');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            addMessage('天気情報を取得できませんでした。後でもう一度お試しください。', 'bot');
+        });
     }
 
     function scrollToBottom() {
