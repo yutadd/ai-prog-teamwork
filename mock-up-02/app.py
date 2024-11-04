@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import requests
-from unidecode import unidecode
 
 app = Flask(__name__)
 
@@ -17,10 +16,7 @@ def get_weather():
     if not city:
         return jsonify({'error': '都市名が指定されていません。'}), 400
 
-    # 日本語の都市名をローマ字に変換
-    city_romanized = unidecode(city)
-
-    url = f'http://api.openweathermap.org/data/2.5/weather?q={city_romanized}&appid={API_KEY}&units=metric&lang=ja'
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric&lang=ja'
     response = requests.get(url)
     if response.status_code == 200:
         weather_data = response.json()
