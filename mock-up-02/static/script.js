@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.error) {
                 addMessage(data.error, 'bot');
             } else {
-                const message = `${city}の天気は${data.weather}で、気温は${data.temp}℃です。`;
+                const message = `${city}の天気は${data.weather}で、気温は${data.temp}℃です。${data.advice}`;
                 addMessage(message, 'bot');
             }
         })
